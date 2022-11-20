@@ -1,0 +1,141 @@
+<?xml version='1.0' encoding='UTF-8'?><wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://stupefysubscription.com/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http" name="SubscriptionService" targetNamespace="http://stupefysubscription.com/">
+  <wsdl:types>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://stupefysubscription.com/" elementFormDefault="unqualified" targetNamespace="http://stupefysubscription.com/" version="1.0">
+
+  <xs:element name="checkStatus" type="tns:checkStatus"/>
+
+  <xs:element name="checkStatusResponse" type="tns:checkStatusResponse"/>
+
+  <xs:element name="requestSubscribe" type="tns:requestSubscribe"/>
+
+  <xs:element name="requestSubscribeResponse" type="tns:requestSubscribeResponse"/>
+
+  <xs:element name="responseRequestSubs" type="tns:responseRequestSubs"/>
+
+  <xs:element name="responseRequestSubsResponse" type="tns:responseRequestSubsResponse"/>
+
+  <xs:complexType name="responseRequestSubs">
+    <xs:sequence>
+      <xs:element name="arg0" type="xs:int"/>
+      <xs:element name="arg1" type="xs:int"/>
+      <xs:element name="arg2" type="xs:boolean"/>
+      <xs:element minOccurs="0" name="arg3" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="responseRequestSubsResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:boolean"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="checkStatus">
+    <xs:sequence>
+      <xs:element name="arg0" type="xs:int"/>
+      <xs:element name="arg1" type="xs:int"/>
+      <xs:element minOccurs="0" name="arg2" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="checkStatusResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:boolean"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="requestSubscribe">
+    <xs:sequence>
+      <xs:element name="arg0" type="xs:int"/>
+      <xs:element name="arg1" type="xs:int"/>
+      <xs:element minOccurs="0" name="arg2" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="requestSubscribeResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:boolean"/>
+    </xs:sequence>
+  </xs:complexType>
+
+</xs:schema>
+  </wsdl:types>
+  <wsdl:message name="requestSubscribeResponse">
+    <wsdl:part element="tns:requestSubscribeResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="checkStatusResponse">
+    <wsdl:part element="tns:checkStatusResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="responseRequestSubs">
+    <wsdl:part element="tns:responseRequestSubs" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="checkStatus">
+    <wsdl:part element="tns:checkStatus" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="requestSubscribe">
+    <wsdl:part element="tns:requestSubscribe" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="responseRequestSubsResponse">
+    <wsdl:part element="tns:responseRequestSubsResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="SubscriptionService">
+    <wsdl:operation name="responseRequestSubs">
+      <wsdl:input message="tns:responseRequestSubs" name="responseRequestSubs">
+    </wsdl:input>
+      <wsdl:output message="tns:responseRequestSubsResponse" name="responseRequestSubsResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="checkStatus">
+      <wsdl:input message="tns:checkStatus" name="checkStatus">
+    </wsdl:input>
+      <wsdl:output message="tns:checkStatusResponse" name="checkStatusResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="requestSubscribe">
+      <wsdl:input message="tns:requestSubscribe" name="requestSubscribe">
+    </wsdl:input>
+      <wsdl:output message="tns:requestSubscribeResponse" name="requestSubscribeResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="SubscriptionServiceSoapBinding" type="tns:SubscriptionService">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="responseRequestSubs">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="responseRequestSubs">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="responseRequestSubsResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="checkStatus">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="checkStatus">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="checkStatusResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="requestSubscribe">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="requestSubscribe">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="requestSubscribeResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="SubscriptionService">
+    <wsdl:port binding="tns:SubscriptionServiceSoapBinding" name="SubscriptionServicePort">
+      <soap:address location="http://172.23.0.3:8080/stupefy-subscription-1.0-SNAPSHOT/SubscriptionService"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

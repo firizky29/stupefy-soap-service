@@ -1,7 +1,6 @@
-FROM maven:3.8-amazoncorretto-17 AS build
-COPY src /home/app/src
-COPY pom.xml /home/app
-RUN mvn -f /home/app/pom.xml clean package
-
-FROM tomcat:10.0-jdk17-corretto
-COPY --from=build /home/app/target/stupefy-subscription-1.0-SNAPSHOT.war /usr/local/tomcat/webapps/
+FROM quay.io/wildfly/wildfly:latest-jdk17
+ARG ADMIN_USER
+ARG ADMIN_PASSWORD
+RUN /opt/jboss/wildfly/bin/add-user.sh $ADMIN_USER $ADMIN_PASSWORD
+COPY target/stupefy-subscription-1.0-SNAPSHOT.war /opt/jboss/wildfly/standalone/deployments/
+CMD ["/opt/jboss/wildfly/bin/standalone.sh", "-b", "0.0.0.0", "-bmanagement", "0.0.0.0"]

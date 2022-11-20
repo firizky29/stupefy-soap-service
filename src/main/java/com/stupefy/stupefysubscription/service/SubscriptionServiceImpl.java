@@ -19,6 +19,6 @@ public class SubscriptionServiceImpl implements SubscriptionServiceInterface {
 
     @Override
     public boolean checkStatus(int creator_id, int subscriber, String apiKey) {
-        return true;
+        return false;
     }
 }
