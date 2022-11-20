@@ -9,7 +9,7 @@ services:
       - ADMIN_USER=${WILDFLY_ADMIN}
       - ADMIN_PASSWORD=${WILDFLY_ADMIN_PASSWORD}
     volumes:
-      - ./target/stupefy-subscription-1.0-SNAPSHOT.war:/opt/jboss/wildfly/standalone/deployments/stupefy-subscription-1.0-SNAPSHOT.war
+      - ./target/stupefy-subscription.war:/opt/jboss/wildfly/standalone/deployments/stupefy-subscription.war
     ports:
       - 3101:8080
       - 9990:9990

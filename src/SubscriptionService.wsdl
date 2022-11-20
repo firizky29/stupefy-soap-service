@@ -135,7 +135,7 @@
   </wsdl:binding>
   <wsdl:service name="SubscriptionService">
     <wsdl:port binding="tns:SubscriptionServiceSoapBinding" name="SubscriptionServicePort">
-      <soap:address location="http://172.23.0.3:8080/stupefy-subscription-1.0-SNAPSHOT/SubscriptionService"/>
+      <soap:address location="http://172.18.0.3:8080/stupefy-subscription/SubscriptionService"/>
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>
