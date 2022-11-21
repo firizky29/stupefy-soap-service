@@ -6,6 +6,10 @@
 
   <xs:element name="checkStatusResponse" type="tns:checkStatusResponse"/>
 
+  <xs:element name="getRequests" type="tns:getRequests"/>
+
+  <xs:element name="getRequestsResponse" type="tns:getRequestsResponse"/>
+
   <xs:element name="requestSubscribe" type="tns:requestSubscribe"/>
 
   <xs:element name="requestSubscribeResponse" type="tns:requestSubscribeResponse"/>
@@ -25,7 +29,7 @@
 
   <xs:complexType name="responseRequestSubsResponse">
     <xs:sequence>
-      <xs:element name="return" type="xs:boolean"/>
+      <xs:element name="return" type="xs:int"/>
     </xs:sequence>
   </xs:complexType>
 
@@ -53,8 +57,26 @@
 
   <xs:complexType name="requestSubscribeResponse">
     <xs:sequence>
-      <xs:element name="return" type="xs:boolean"/>
+      <xs:element name="return" type="xs:int"/>
     </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getRequests">
+    <xs:sequence>
+      <xs:element name="arg0" type="xs:int"/>
+      <xs:element name="arg1" type="xs:int"/>
+      <xs:element minOccurs="0" name="arg2" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getRequestsResponse">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:subscription"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="subscription">
+    <xs:sequence/>
   </xs:complexType>
 
 </xs:schema>
@@ -71,12 +93,20 @@
     <wsdl:part element="tns:responseRequestSubs" name="parameters">
     </wsdl:part>
   </wsdl:message>
+  <wsdl:message name="getRequestsResponse">
+    <wsdl:part element="tns:getRequestsResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
   <wsdl:message name="checkStatus">
     <wsdl:part element="tns:checkStatus" name="parameters">
     </wsdl:part>
   </wsdl:message>
   <wsdl:message name="requestSubscribe">
     <wsdl:part element="tns:requestSubscribe" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getRequests">
+    <wsdl:part element="tns:getRequests" name="parameters">
     </wsdl:part>
   </wsdl:message>
   <wsdl:message name="responseRequestSubsResponse">
@@ -100,6 +130,12 @@
       <wsdl:input message="tns:requestSubscribe" name="requestSubscribe">
     </wsdl:input>
       <wsdl:output message="tns:requestSubscribeResponse" name="requestSubscribeResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getRequests">
+      <wsdl:input message="tns:getRequests" name="getRequests">
+    </wsdl:input>
+      <wsdl:output message="tns:getRequestsResponse" name="getRequestsResponse">
     </wsdl:output>
     </wsdl:operation>
   </wsdl:portType>
@@ -132,10 +168,19 @@
         <soap:body use="literal"/>
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="getRequests">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getRequests">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getRequestsResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:service name="SubscriptionService">
     <wsdl:port binding="tns:SubscriptionServiceSoapBinding" name="SubscriptionServicePort">
-      <soap:address location="http://172.18.0.3:8080/stupefy-subscription/SubscriptionService"/>
+      <soap:address location="http://172.24.0.3:8080/SubscriptionService"/>
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

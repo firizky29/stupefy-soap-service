@@ -1,7 +1,6 @@
 version: '3.3'
 services:
   server:
-    image: stupefy-soap-service:latest
     build:
       context: .
       dockerfile: Dockerfile
@@ -10,6 +9,7 @@ services:
       - ADMIN_PASSWORD=${WILDFLY_ADMIN_PASSWORD}
     volumes:
       - ./target/stupefy-subscription.war:/opt/jboss/wildfly/standalone/deployments/stupefy-subscription.war
+      - ./scripts:/opt/jboss/scripts
     ports:
       - 3101:8080
       - 9990:9990
