@@ -9,6 +9,11 @@ import java.util.List;
 import com.stupefy.stupefysubscription.database.Database;
 import com.stupefy.stupefysubscription.enums.Status;
 
+import jakarta.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlType;
+
+@XmlRootElement(name = "Subscription")
+@XmlType(propOrder = { "creator_id", "subscriber", "status" })
 public class Subscription {
     private static Connection conn = Database.getConnection();
     private int creator_id;
@@ -64,5 +69,29 @@ public class Subscription {
             e.printStackTrace();
             return null;
         }
+    }
+
+    public int getCreator_id() {
+        return creator_id;
+    }
+
+    public int getSubscriber() {
+        return subscriber;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setCreator_id(int creator_id) {
+        this.creator_id = creator_id;
+    }
+
+    public void setSubscriber(int subscriber) {
+        this.subscriber = subscriber;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
     }
 }
