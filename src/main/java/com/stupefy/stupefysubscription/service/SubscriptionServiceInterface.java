@@ -19,9 +19,9 @@ public interface SubscriptionServiceInterface {
     @WebResult(name = "Request")
     public List<Subscription> getRequests(@WebParam(name = "offset") int offset,@WebParam(name = "limit") int limit,@WebParam(name = "apiKey") String apiKey);
 
-    @WebMethod(operationName = "responseRequestSubs")
+    @WebMethod(operationName = "respondRequestSubs")
     @WebResult(name = "rowChange")
-    public int responseRequestSubs(@WebParam(name = "creator_id") int creator_id, @WebParam(name = "subscriber") int subscriber, @WebParam(name = "isAccepted") boolean isAccepted, @WebParam(name = "apiKey") String apiKey);
+    public int respondRequestSubs(@WebParam(name = "creator_id") int creator_id, @WebParam(name = "subscriber") int subscriber, @WebParam(name = "isAccepted") boolean isAccepted, @WebParam(name = "apiKey") String apiKey);
 
     @WebMethod
     public boolean checkStatus(@WebParam int creator_id, @WebParam int subscriber, @WebParam String apiKey);

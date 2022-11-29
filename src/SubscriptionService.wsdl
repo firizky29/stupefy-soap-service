@@ -16,11 +16,11 @@
 
   <xs:element name="requestSubscribeResponse" type="tns:requestSubscribeResponse"/>
 
-  <xs:element name="responseRequestSubs" type="tns:responseRequestSubs"/>
+  <xs:element name="respondRequestSubs" type="tns:respondRequestSubs"/>
 
-  <xs:element name="responseRequestSubsResponse" type="tns:responseRequestSubsResponse"/>
+  <xs:element name="respondRequestSubsResponse" type="tns:respondRequestSubsResponse"/>
 
-  <xs:complexType name="responseRequestSubs">
+  <xs:complexType name="respondRequestSubs">
     <xs:sequence>
       <xs:element name="creator_id" type="xs:int"/>
       <xs:element name="subscriber" type="xs:int"/>
@@ -29,7 +29,7 @@
     </xs:sequence>
   </xs:complexType>
 
-  <xs:complexType name="responseRequestSubsResponse">
+  <xs:complexType name="respondRequestSubsResponse">
     <xs:sequence>
       <xs:element name="rowChange" type="xs:int"/>
     </xs:sequence>
@@ -95,6 +95,10 @@
 
 </xs:schema>
   </wsdl:types>
+  <wsdl:message name="respondRequestSubs">
+    <wsdl:part element="tns:respondRequestSubs" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
   <wsdl:message name="requestSubscribeResponse">
     <wsdl:part element="tns:requestSubscribeResponse" name="parameters">
     </wsdl:part>
@@ -103,12 +107,12 @@
     <wsdl:part element="tns:checkStatusResponse" name="parameters">
     </wsdl:part>
   </wsdl:message>
-  <wsdl:message name="responseRequestSubs">
-    <wsdl:part element="tns:responseRequestSubs" name="parameters">
-    </wsdl:part>
-  </wsdl:message>
   <wsdl:message name="getRequestsResponse">
     <wsdl:part element="tns:getRequestsResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="respondRequestSubsResponse">
+    <wsdl:part element="tns:respondRequestSubsResponse" name="parameters">
     </wsdl:part>
   </wsdl:message>
   <wsdl:message name="checkStatus">
@@ -123,15 +127,11 @@
     <wsdl:part element="tns:getRequests" name="parameters">
     </wsdl:part>
   </wsdl:message>
-  <wsdl:message name="responseRequestSubsResponse">
-    <wsdl:part element="tns:responseRequestSubsResponse" name="parameters">
-    </wsdl:part>
-  </wsdl:message>
   <wsdl:portType name="SubscriptionService">
-    <wsdl:operation name="responseRequestSubs">
-      <wsdl:input message="tns:responseRequestSubs" name="responseRequestSubs">
+    <wsdl:operation name="respondRequestSubs">
+      <wsdl:input message="tns:respondRequestSubs" name="respondRequestSubs">
     </wsdl:input>
-      <wsdl:output message="tns:responseRequestSubsResponse" name="responseRequestSubsResponse">
+      <wsdl:output message="tns:respondRequestSubsResponse" name="respondRequestSubsResponse">
     </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="checkStatus">
@@ -155,12 +155,12 @@
   </wsdl:portType>
   <wsdl:binding name="SubscriptionServiceSoapBinding" type="tns:SubscriptionService">
     <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
-    <wsdl:operation name="responseRequestSubs">
+    <wsdl:operation name="respondRequestSubs">
       <soap:operation soapAction="" style="document"/>
-      <wsdl:input name="responseRequestSubs">
+      <wsdl:input name="respondRequestSubs">
         <soap:body use="literal"/>
       </wsdl:input>
-      <wsdl:output name="responseRequestSubsResponse">
+      <wsdl:output name="respondRequestSubsResponse">
         <soap:body use="literal"/>
       </wsdl:output>
     </wsdl:operation>

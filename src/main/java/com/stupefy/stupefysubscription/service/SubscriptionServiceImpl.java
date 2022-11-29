@@ -22,8 +22,8 @@ public class SubscriptionServiceImpl implements SubscriptionServiceInterface {
     }
 
     @Override
-    public int responseRequestSubs(int creator_id, int subscriber, boolean isAccepted, String apiKey) {
-        int res = Subscription.responsePendingSubs(creator_id, subscriber, isAccepted);
+    public int respondRequestSubs(int creator_id, int subscriber, boolean isAccepted, String apiKey) {
+        int res = Subscription.respondPendingSubs(creator_id, subscriber, isAccepted);
         return res;
     }
 

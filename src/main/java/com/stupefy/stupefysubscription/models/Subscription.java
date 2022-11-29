@@ -43,7 +43,7 @@ public class Subscription {
         } 
     }
 
-    public static int responsePendingSubs(int creator_id, int subscriber, boolean isAccepted) {
+    public static int respondPendingSubs(int creator_id, int subscriber, boolean isAccepted) {
         try {
             Statement stmt = conn.createStatement();
             int rowChange = stmt.executeUpdate("UPDATE subscriptions SET status = " + (isAccepted ? "'ACCEPTED'" : "'REJECTED'") + " WHERE creator_id = " + creator_id + " AND subscriber = " + subscriber);
