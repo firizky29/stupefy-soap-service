@@ -15,6 +15,7 @@ public class Migrate {
                 creator_id INT NOT NULL,
                 subscriber INT NOT NULL,
                 status ENUM("PENDING", "ACCEPTED", "REJECTED") NOT NULL DEFAULT "PENDING",
+                callbackurl VARCHAR(511),
                 last_updated TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
                 PRIMARY KEY(creator_id, subscriber)
             )""");

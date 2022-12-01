@@ -19,7 +19,7 @@ public class SubscriptionServiceImpl implements SubscriptionServiceInterface {
     WebServiceContext context;
 
     @Override
-    public SubscribeResponse requestSubscribe(int creator_id, int subscriber, String apiKey) {
+    public SubscribeResponse requestSubscribe(int creator_id, int subscriber, String callbackUrl, String apiKey) {
         if(apiKey.equals(APIKey.APP)){
             HttpServletRequest request = (HttpServletRequest) context.getMessageContext().get(MessageContext.SERVLET_REQUEST);
 
@@ -27,7 +27,7 @@ public class SubscriptionServiceImpl implements SubscriptionServiceInterface {
             Logging log = new Logging("Request to subscribe from " + ip, ip, "SubscriptionService/requestSubscribe");
             log.pushToDatabase();
 
-            int res = Subscription.addPendingSubs(creator_id, subscriber);
+            int res = Subscription.addPendingSubs(creator_id, subscriber, callbackUrl);
             return new SubscribeResponse(200, "OK", res);
         } else{
             return new SubscribeResponse(401, "Unauthorized", -1);

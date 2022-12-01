@@ -14,7 +14,7 @@ import jakarta.jws.WebService;
 public interface SubscriptionServiceInterface {
     @WebMethod(operationName = "requestSubscribe")
     @WebResult(name = "SubscribeResponse")
-    public SubscribeResponse requestSubscribe(@WebParam(name = "creator_id") int creator_id, @WebParam(name = "subscriber") int subscriber, @WebParam(name = "apiKey") String apiKey);
+    public SubscribeResponse requestSubscribe(@WebParam(name = "creator_id") int creator_id, @WebParam(name = "subscriber") int subscriber, @WebParam(name = "callbackUrl") String callbackUrl, @WebParam(name = "apiKey") String apiKey);
 
     @WebMethod(operationName = "getRequests")
     @WebResult(name = "RequestsResponse")

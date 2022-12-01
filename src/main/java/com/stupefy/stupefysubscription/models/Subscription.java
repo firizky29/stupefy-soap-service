@@ -8,6 +8,7 @@ import java.util.List;
 
 import com.stupefy.stupefysubscription.database.Database;
 import com.stupefy.stupefysubscription.enums.Status;
+import com.stupefy.stupefysubscription.httpclient.HttpClient;
 
 import jakarta.xml.bind.annotation.XmlRootElement;
 import jakarta.xml.bind.annotation.XmlType;
@@ -32,10 +33,10 @@ public class Subscription {
         this.status = Status.PENDING;
     }
 
-    public static int addPendingSubs(int creator_id, int subscriber) {
+    public static int addPendingSubs(int creator_id, int subscriber, String callbackUrl) {
         try {
             Statement stmt = conn.createStatement();
-            int rowChange = stmt.executeUpdate("INSERT INTO subscriptions(creator_id, subscriber, status) VALUES(" + creator_id + ", " + subscriber +",'PENDING')");
+            int rowChange = stmt.executeUpdate("INSERT INTO subscriptions(creator_id, subscriber, status, callbackurl) VALUES(" + creator_id + ", " + subscriber +",'PENDING', '" + callbackUrl + "')");
             return rowChange;
         } catch (Exception e) {
             e.printStackTrace();
@@ -46,7 +47,27 @@ public class Subscription {
     public static int respondPendingSubs(int creator_id, int subscriber, boolean isAccepted) {
         try {
             Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT callbackurl FROM subscriptions WHERE creator_id = " + creator_id + " AND subscriber = " + subscriber);
+            rs.next();
+            String callbackUrl = rs.getString("callbackurl");
             int rowChange = stmt.executeUpdate("UPDATE subscriptions SET status = " + (isAccepted ? "'ACCEPTED'" : "'REJECTED'") + " WHERE creator_id = " + creator_id + " AND subscriber = " + subscriber);
+            if(rowChange>0) {
+                // callback ke app
+                String baseurl="http://localhost:8080/", dir="dummy";
+                for(int i=8; i<callbackUrl.length(); i++) {
+                    if(callbackUrl.charAt(i) == '/') {
+                        baseurl = callbackUrl.substring(0, i+1);
+                        dir = callbackUrl.substring(i+1);
+                        break;
+                    }
+                }
+                HttpClient client = new HttpClient(baseurl);
+                if(isAccepted) {
+                    client.putRespond(dir, "ACCEPTED");
+                } else {
+                    client.putRespond(dir, "REJECTED");
+                }
+            }
             return rowChange;
         } catch (Exception e) {
             e.printStackTrace();
