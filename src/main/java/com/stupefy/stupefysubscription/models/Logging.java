@@ -22,35 +22,17 @@ public class Logging {
         this.endpoint = endpoint;
     }
 
-    public int getId() {
-        return id;
+    public boolean pushToDatabase() {
+        try {
+            Statement stmt = conn.createStatement();
+            String sql = "INSERT INTO logging (description, IP, endpoint) VALUES ('" + this.description + "', '" + this.IP + "', '" + this.endpoint + "')";
+            stmt.executeUpdate(sql);
+            stmt.close();
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getIP() {
-        return IP;
-    }
-
-    public void setIP(String IP) {
-        this.IP = IP;
-    }
-
-    public String getEndpoint() {
-        return endpoint;
-    }
-
-    public void setEndpoint(String endpoint) {
-        this.endpoint = endpoint;
-    }
+    
 }

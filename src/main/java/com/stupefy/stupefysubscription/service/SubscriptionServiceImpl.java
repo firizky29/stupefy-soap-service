@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import com.stupefy.stupefysubscription.constants.APIKey;
 import com.stupefy.stupefysubscription.models.*;
 
 import jakarta.annotation.Resource;
@@ -19,8 +20,13 @@ public class SubscriptionServiceImpl implements SubscriptionServiceInterface {
 
     @Override
     public SubscribeResponse requestSubscribe(int creator_id, int subscriber, String apiKey) {
-        if(apiKey.equals("REST")){
+        if(apiKey.equals(APIKey.APP)){
             HttpServletRequest request = (HttpServletRequest) context.getMessageContext().get(MessageContext.SERVLET_REQUEST);
+
+            String ip = request.getRemoteAddr();
+            Logging log = new Logging("Request to subscribe from " + ip, ip, "SubscriptionService/requestSubscribe");
+            log.pushToDatabase();
+
             int res = Subscription.addPendingSubs(creator_id, subscriber);
             return new SubscribeResponse(200, "OK", res);
         } else{
@@ -30,10 +36,15 @@ public class SubscriptionServiceImpl implements SubscriptionServiceInterface {
 
     @Override
     public RequestsResponse getRequests(int offset, int limit, String apiKey) {
-        if(apiKey.equals("REST")){
+        if(apiKey.equals(APIKey.REST)){
             HttpServletRequest request = (HttpServletRequest)context.getMessageContext().get(MessageContext.SERVLET_REQUEST);
+
+            String ip = request.getRemoteAddr();
+            Logging log = new Logging("Request to get requests from " + ip, ip, "SubscriptionService/getRequests");
+            log.pushToDatabase();
+
             List<Subscription> res = Subscription.getPendingSubs(offset, limit);
-            return new RequestsResponse(200, "NOT OK", res);
+            return new RequestsResponse(200, "OK", res);
         } else{
             return new RequestsResponse(401, "Unauthorized", Collections.<Subscription>emptyList());
         }
@@ -41,8 +52,13 @@ public class SubscriptionServiceImpl implements SubscriptionServiceInterface {
 
     @Override
     public RequestSubsResponse respondRequestSubs(int creator_id, int subscriber, boolean isAccepted, String apiKey) {
-        if(apiKey.equals("REST")){
+        if(apiKey.equals(APIKey.REST)){
             HttpServletRequest request = (HttpServletRequest)context.getMessageContext().get(MessageContext.SERVLET_REQUEST);
+
+            String ip = request.getRemoteAddr();
+            Logging log = new Logging("Request to respond to request from " + ip, ip, "SubscriptionService/respondRequestSubs");
+            log.pushToDatabase();
+
             int res = Subscription.respondPendingSubs(creator_id, subscriber, isAccepted);
             return new RequestSubsResponse(200, "OK", res);
         } else{
@@ -52,8 +68,13 @@ public class SubscriptionServiceImpl implements SubscriptionServiceInterface {
 
     @Override
     public StatusResponse checkStatus(int creator_id, int subscriber, String apiKey) {
-        if(apiKey.equals("REST")){
+        if(apiKey.equals(APIKey.APP)){
             HttpServletRequest request = (HttpServletRequest)context.getMessageContext().get(MessageContext.SERVLET_REQUEST);
+
+            String ip = request.getRemoteAddr();
+            Logging log = new Logging("Request to check status from " + ip, ip, "SubscriptionService/checkStatus");
+            log.pushToDatabase();
+
             return new StatusResponse(200, "OK", false);
         } else{
             return new StatusResponse(401, "Unauthorized", false);
