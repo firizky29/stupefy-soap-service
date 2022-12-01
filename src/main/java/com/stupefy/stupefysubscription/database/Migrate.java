@@ -1,6 +1,7 @@
 package com.stupefy.stupefysubscription.database;
 
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.sql.Statement;
 
 public class Migrate {
@@ -22,7 +23,24 @@ public class Migrate {
         }
     }
 
+    private static void createTableLogging() {
+        try {
+            Statement stmt = conn.createStatement();
+            stmt.executeUpdate("""
+                CREATE TABLE IF NOT EXISTS logging(
+                id INT AUTO_INCREMENT PRIMARY KEY,
+                description VARCHAR(256) NOT NULL,
+                IP VARCHAR(16) NOT NULL,
+                endpoint VARCHAR(256) NOT NULL,
+                requested_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            )""");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     public static void main(String[] args) {
         createTableSubscription();
+        createTableLogging();
     }
 }
