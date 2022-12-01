@@ -24,6 +24,7 @@ public interface SubscriptionServiceInterface {
     @WebResult(name = "RequestResponse")
     public RequestSubsResponse respondRequestSubs(@WebParam(name = "creator_id") int creator_id, @WebParam(name = "subscriber") int subscriber, @WebParam(name = "isAccepted") boolean isAccepted, @WebParam(name = "apiKey") String apiKey);
 
-    @WebMethod
-    public StatusResponse checkStatus(@WebParam int creator_id, @WebParam int subscriber, @WebParam String apiKey);
+    @WebMethod(operationName = "checkStatus")
+    @WebResult(name = "RequestResponse")
+    public StatusResponse checkStatus(@WebParam(name = "creator_id") int creator_id, @WebParam(name = "subscriber") int subscriber, @WebParam(name = "apiKey") String apiKey);
 }
