@@ -71,6 +71,17 @@ public class Subscription {
         }
     }
 
+    public static boolean checkStatus(int creator_id, int subscriber) {
+        try {
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM subscriptions WHERE creator_id = " + creator_id + " AND subscriber = " + subscriber);
+            return Status.valueOf(rs.getString("status")) == Status.ACCEPTED;
+        }catch (Exception e){
+            e.printStackTrace();
+            return false;
+        }
+    }
+
     public int getCreator_id() {
         return creator_id;
     }

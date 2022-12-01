@@ -75,7 +75,8 @@ public class SubscriptionServiceImpl implements SubscriptionServiceInterface {
             Logging log = new Logging("Request to check status from " + ip, ip, "SubscriptionService/checkStatus");
             log.pushToDatabase();
 
-            return new StatusResponse(200, "OK", false);
+            boolean res = Subscription.checkStatus(creator_id, subscriber);
+            return new StatusResponse(200, "OK", res);
         } else{
             return new StatusResponse(401, "Unauthorized", false);
         }
