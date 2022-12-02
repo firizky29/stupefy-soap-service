@@ -32,7 +32,14 @@ public class HttpClient {
                     System.out.println("Success");
                 } else {
                     System.out.println("invalid");
-                    System.out.println(response.errorBody());
+                    System.out.println(dir);
+                    System.out.println(status);
+                    System.out.println(call.request());
+                    System.out.println(response.code());
+                    System.out.println(response.body());
+                    System.out.println(response.headers());
+                    System.out.println(response.message());
+                    System.out.println(response.raw());
                 }
             }
 

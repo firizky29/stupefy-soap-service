@@ -9,5 +9,5 @@ import retrofit2.http.Path;
 
 public interface Apiservice {
     @PUT("{dir}")
-    Call<Boolean> putRespond(@Path("dir") String dir, @Body RespondRequest respond);
+    Call<Boolean> putRespond(@Path(value="dir",encoded=true) String dir, @Body RespondRequest respond);
 }

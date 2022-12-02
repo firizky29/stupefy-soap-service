@@ -8,6 +8,9 @@ public class Migrate {
     private static Connection conn = Database.getConnection();
 
     private static void createTableSubscription() {
+        if(conn==null) {
+            conn = Database.getConnection();
+        }
         try {
             Statement stmt = conn.createStatement();
             stmt.executeUpdate("""
@@ -25,6 +28,9 @@ public class Migrate {
     }
 
     private static void createTableLogging() {
+        if(conn==null) {
+            conn = Database.getConnection();
+        }        
         try {
             Statement stmt = conn.createStatement();
             stmt.executeUpdate("""
