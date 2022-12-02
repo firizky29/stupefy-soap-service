@@ -34,6 +34,9 @@ public class Subscription {
     }
 
     public static int addPendingSubs(int creator_id, int subscriber, String callbackUrl) {
+        if(conn==null) {
+            conn = Database.getConnection();
+        }        
         try {
             Statement stmt = conn.createStatement();
             int rowChange = stmt.executeUpdate("INSERT INTO subscriptions(creator_id, subscriber, status, callbackurl) VALUES(" + creator_id + ", " + subscriber +",'PENDING', '" + callbackUrl + "')");
@@ -45,11 +48,15 @@ public class Subscription {
     }
 
     public static int respondPendingSubs(int creator_id, int subscriber, boolean isAccepted) {
+        if(conn==null) {
+            conn = Database.getConnection();
+        }        
         try {
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT callbackurl FROM subscriptions WHERE creator_id = " + creator_id + " AND subscriber = " + subscriber);
             rs.next();
             String callbackUrl = rs.getString("callbackurl");
+            stmt = conn.createStatement();
             int rowChange = stmt.executeUpdate("UPDATE subscriptions SET status = " + (isAccepted ? "'ACCEPTED'" : "'REJECTED'") + " WHERE creator_id = " + creator_id + " AND subscriber = " + subscriber);
             if(rowChange>0) {
                 // callback ke app
@@ -76,6 +83,9 @@ public class Subscription {
     }
 
     public static List<Subscription> getPendingSubs(int offset, int limit) {
+        if(conn==null) {
+            conn = Database.getConnection();
+        }        
         try {
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * FROM subscriptions WHERE status = 'PENDING' ORDER BY last_updated DESC LIMIT " + offset + ", " + limit);
@@ -93,6 +103,9 @@ public class Subscription {
     }
 
     public static boolean checkStatus(int creator_id, int subscriber) {
+        if(conn==null) {
+            conn = Database.getConnection();
+        }        
         try {
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * FROM subscriptions WHERE creator_id = " + creator_id + " AND subscriber = " + subscriber);

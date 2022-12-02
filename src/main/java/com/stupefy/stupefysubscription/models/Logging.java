@@ -27,7 +27,7 @@ public class Logging {
             Statement stmt = conn.createStatement();
             String sql = "INSERT INTO logging (description, IP, endpoint) VALUES ('" + this.description + "', '" + this.IP + "', '" + this.endpoint + "')";
             stmt.executeUpdate(sql);
-            stmt.close();
+            // stmt.close();
             return true;
         } catch (Exception e) {
             e.printStackTrace();

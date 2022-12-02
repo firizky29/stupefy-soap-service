@@ -1,150 +1,191 @@
-This XML file does not appear to have any style information associated with it. The document tree is shown below.
-<wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://stupefysubscription.com/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http" name="SubscriptionService" targetNamespace="http://stupefysubscription.com/">
+<?xml version='1.0' encoding='UTF-8'?><wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://stupefysubscription.com/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http" name="SubscriptionService" targetNamespace="http://stupefysubscription.com/">
   <wsdl:types>
-    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://stupefysubscription.com/" elementFormDefault="unqualified" targetNamespace="http://stupefysubscription.com/" version="1.0">
-      <xs:element name="Response Object" nillable="true" type="xs:anyType"/>
-      <xs:element name="Subscription" type="tns:subscription"/>
-      <xs:element name="checkStatus" type="tns:checkStatus"/>
-      <xs:element name="checkStatusResponse" type="tns:checkStatusResponse"/>
-      <xs:element name="getRequests" type="tns:getRequests"/>
-      <xs:element name="getRequestsResponse" type="tns:getRequestsResponse"/>
-      <xs:element name="requestSubscribe" type="tns:requestSubscribe"/>
-      <xs:element name="requestSubscribeResponse" type="tns:requestSubscribeResponse"/>
-      <xs:element name="respondRequestSubs" type="tns:respondRequestSubs"/>
-      <xs:element name="respondRequestSubsResponse" type="tns:respondRequestSubsResponse"/>
-      <xs:complexType name="respondRequestSubs">
-        <xs:sequence>
-          <xs:element name="creator_id" type="xs:int"/>
-          <xs:element name="subscriber" type="xs:int"/>
-          <xs:element name="isAccepted" type="xs:boolean"/>
-          <xs:element minOccurs="0" name="apiKey" type="xs:string"/>
-        </xs:sequence>
-      </xs:complexType>
-      <xs:complexType name="respondRequestSubsResponse">
-        <xs:sequence>
-          <xs:element minOccurs="0" name="RequestResponse" type="tns:requestSubsResponse"/>
-        </xs:sequence>
-      </xs:complexType>
-      <xs:complexType name="requestSubsResponse">
-        <xs:sequence>
-          <xs:element name="status" type="xs:int"/>
-          <xs:element minOccurs="0" name="statusText" type="xs:string"/>
-          <xs:element name="data" type="xs:int"/>
-        </xs:sequence>
-      </xs:complexType>
-      <xs:complexType name="checkStatus">
-        <xs:sequence>
-          <xs:element name="arg0" type="xs:int"/>
-          <xs:element name="arg1" type="xs:int"/>
-          <xs:element minOccurs="0" name="arg2" type="xs:string"/>
-        </xs:sequence>
-      </xs:complexType>
-      <xs:complexType name="checkStatusResponse">
-        <xs:sequence>
-          <xs:element minOccurs="0" name="return" type="tns:statusResponse"/>
-        </xs:sequence>
-      </xs:complexType>
-      <xs:complexType name="statusResponse">
-        <xs:sequence>
-          <xs:element name="status" type="xs:int"/>
-          <xs:element minOccurs="0" name="statusText" type="xs:string"/>
-          <xs:element name="data" type="xs:boolean"/>
-        </xs:sequence>
-      </xs:complexType>
-      <xs:complexType name="requestSubscribe">
-        <xs:sequence>
-          <xs:element name="creator_id" type="xs:int"/>
-          <xs:element name="subscriber" type="xs:int"/>
-          <xs:element minOccurs="0" name="apiKey" type="xs:string"/>
-        </xs:sequence>
-      </xs:complexType>
-      <xs:complexType name="requestSubscribeResponse">
-        <xs:sequence>
-          <xs:element minOccurs="0" name="SubscribeResponse" type="tns:subscribeResponse"/>
-        </xs:sequence>
-      </xs:complexType>
-      <xs:complexType name="subscribeResponse">
-        <xs:sequence>
-          <xs:element name="status" type="xs:int"/>
-          <xs:element minOccurs="0" name="statusText" type="xs:string"/>
-          <xs:element name="data" type="xs:int"/>
-        </xs:sequence>
-      </xs:complexType>
-      <xs:complexType name="getRequests">
-        <xs:sequence>
-          <xs:element name="offset" type="xs:int"/>
-          <xs:element name="limit" type="xs:int"/>
-          <xs:element minOccurs="0" name="apiKey" type="xs:string"/>
-        </xs:sequence>
-      </xs:complexType>
-      <xs:complexType name="getRequestsResponse">
-        <xs:sequence>
-          <xs:element minOccurs="0" name="RequestsResponse" type="tns:requestsResponse"/>
-        </xs:sequence>
-      </xs:complexType>
-      <xs:complexType name="requestsResponse">
-        <xs:sequence>
-          <xs:element name="status" type="xs:int"/>
-          <xs:element minOccurs="0" name="statusText" type="xs:string"/>
-          <xs:element maxOccurs="unbounded" minOccurs="0" name="data" nillable="true" type="tns:subscription"/>
-        </xs:sequence>
-      </xs:complexType>
-      <xs:complexType name="subscription">
-        <xs:sequence>
-          <xs:element name="creator_id" type="xs:int"/>
-          <xs:element name="subscriber" type="xs:int"/>
-          <xs:element minOccurs="0" name="status" type="tns:status"/>
-        </xs:sequence>
-      </xs:complexType>
-      <xs:simpleType name="status">
-        <xs:restriction base="xs:string">
-          <xs:enumeration value="PENDING"/>
-          <xs:enumeration value="ACCEPTED"/>
-          <xs:enumeration value="REJECTED"/>
-        </xs:restriction>
-      </xs:simpleType>
-    </xs:schema>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://stupefysubscription.com/" elementFormDefault="unqualified" targetNamespace="http://stupefysubscription.com/" version="1.0">
+
+  <xs:element name="Response Object" nillable="true" type="xs:anyType"/>
+
+  <xs:element name="Subscription" type="tns:subscription"/>
+
+  <xs:element name="checkStatus" type="tns:checkStatus"/>
+
+  <xs:element name="checkStatusResponse" type="tns:checkStatusResponse"/>
+
+  <xs:element name="getRequests" type="tns:getRequests"/>
+
+  <xs:element name="getRequestsResponse" type="tns:getRequestsResponse"/>
+
+  <xs:element name="requestSubscribe" type="tns:requestSubscribe"/>
+
+  <xs:element name="requestSubscribeResponse" type="tns:requestSubscribeResponse"/>
+
+  <xs:element name="respondRequestSubs" type="tns:respondRequestSubs"/>
+
+  <xs:element name="respondRequestSubsResponse" type="tns:respondRequestSubsResponse"/>
+
+  <xs:complexType name="respondRequestSubs">
+    <xs:sequence>
+      <xs:element name="creator_id" type="xs:int"/>
+      <xs:element name="subscriber" type="xs:int"/>
+      <xs:element name="isAccepted" type="xs:boolean"/>
+      <xs:element minOccurs="0" name="apiKey" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="respondRequestSubsResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="RequestResponse" type="tns:requestSubsResponse"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="requestSubsResponse">
+    <xs:sequence>
+      <xs:element name="status" type="xs:int"/>
+      <xs:element minOccurs="0" name="statusText" type="xs:string"/>
+      <xs:element name="data" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="checkStatus">
+    <xs:sequence>
+      <xs:element name="creator_id" type="xs:int"/>
+      <xs:element name="subscriber" type="xs:int"/>
+      <xs:element minOccurs="0" name="apiKey" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="checkStatusResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="RequestResponse" type="tns:statusResponse"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="statusResponse">
+    <xs:sequence>
+      <xs:element name="status" type="xs:int"/>
+      <xs:element minOccurs="0" name="statusText" type="xs:string"/>
+      <xs:element name="data" type="xs:boolean"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="requestSubscribe">
+    <xs:sequence>
+      <xs:element name="creator_id" type="xs:int"/>
+      <xs:element name="subscriber" type="xs:int"/>
+      <xs:element minOccurs="0" name="callbackUrl" type="xs:string"/>
+      <xs:element minOccurs="0" name="apiKey" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="requestSubscribeResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="SubscribeResponse" type="tns:subscribeResponse"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="subscribeResponse">
+    <xs:sequence>
+      <xs:element name="status" type="xs:int"/>
+      <xs:element minOccurs="0" name="statusText" type="xs:string"/>
+      <xs:element name="data" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getRequests">
+    <xs:sequence>
+      <xs:element name="offset" type="xs:int"/>
+      <xs:element name="limit" type="xs:int"/>
+      <xs:element minOccurs="0" name="apiKey" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getRequestsResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="RequestsResponse" type="tns:requestsResponse"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="requestsResponse">
+    <xs:sequence>
+      <xs:element name="status" type="xs:int"/>
+      <xs:element minOccurs="0" name="statusText" type="xs:string"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="data" nillable="true" type="tns:subscription"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="subscription">
+    <xs:sequence>
+      <xs:element name="creator_id" type="xs:int"/>
+      <xs:element name="subscriber" type="xs:int"/>
+      <xs:element minOccurs="0" name="status" type="tns:status"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:simpleType name="status">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="PENDING"/>
+      <xs:enumeration value="ACCEPTED"/>
+      <xs:enumeration value="REJECTED"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+</xs:schema>
   </wsdl:types>
   <wsdl:message name="respondRequestSubs">
-    <wsdl:part element="tns:respondRequestSubs" name="parameters"> </wsdl:part>
+    <wsdl:part element="tns:respondRequestSubs" name="parameters">
+    </wsdl:part>
   </wsdl:message>
   <wsdl:message name="requestSubscribeResponse">
-    <wsdl:part element="tns:requestSubscribeResponse" name="parameters"> </wsdl:part>
+    <wsdl:part element="tns:requestSubscribeResponse" name="parameters">
+    </wsdl:part>
   </wsdl:message>
   <wsdl:message name="checkStatusResponse">
-    <wsdl:part element="tns:checkStatusResponse" name="parameters"> </wsdl:part>
+    <wsdl:part element="tns:checkStatusResponse" name="parameters">
+    </wsdl:part>
   </wsdl:message>
   <wsdl:message name="getRequestsResponse">
-    <wsdl:part element="tns:getRequestsResponse" name="parameters"> </wsdl:part>
+    <wsdl:part element="tns:getRequestsResponse" name="parameters">
+    </wsdl:part>
   </wsdl:message>
   <wsdl:message name="respondRequestSubsResponse">
-    <wsdl:part element="tns:respondRequestSubsResponse" name="parameters"> </wsdl:part>
+    <wsdl:part element="tns:respondRequestSubsResponse" name="parameters">
+    </wsdl:part>
   </wsdl:message>
   <wsdl:message name="checkStatus">
-    <wsdl:part element="tns:checkStatus" name="parameters"> </wsdl:part>
+    <wsdl:part element="tns:checkStatus" name="parameters">
+    </wsdl:part>
   </wsdl:message>
   <wsdl:message name="requestSubscribe">
-    <wsdl:part element="tns:requestSubscribe" name="parameters"> </wsdl:part>
+    <wsdl:part element="tns:requestSubscribe" name="parameters">
+    </wsdl:part>
   </wsdl:message>
   <wsdl:message name="getRequests">
-    <wsdl:part element="tns:getRequests" name="parameters"> </wsdl:part>
+    <wsdl:part element="tns:getRequests" name="parameters">
+    </wsdl:part>
   </wsdl:message>
   <wsdl:portType name="SubscriptionService">
     <wsdl:operation name="respondRequestSubs">
-      <wsdl:input message="tns:respondRequestSubs" name="respondRequestSubs"> </wsdl:input>
-      <wsdl:output message="tns:respondRequestSubsResponse" name="respondRequestSubsResponse"> </wsdl:output>
+      <wsdl:input message="tns:respondRequestSubs" name="respondRequestSubs">
+    </wsdl:input>
+      <wsdl:output message="tns:respondRequestSubsResponse" name="respondRequestSubsResponse">
+    </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="checkStatus">
-      <wsdl:input message="tns:checkStatus" name="checkStatus"> </wsdl:input>
-      <wsdl:output message="tns:checkStatusResponse" name="checkStatusResponse"> </wsdl:output>
+      <wsdl:input message="tns:checkStatus" name="checkStatus">
+    </wsdl:input>
+      <wsdl:output message="tns:checkStatusResponse" name="checkStatusResponse">
+    </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="requestSubscribe">
-      <wsdl:input message="tns:requestSubscribe" name="requestSubscribe"> </wsdl:input>
-      <wsdl:output message="tns:requestSubscribeResponse" name="requestSubscribeResponse"> </wsdl:output>
+      <wsdl:input message="tns:requestSubscribe" name="requestSubscribe">
+    </wsdl:input>
+      <wsdl:output message="tns:requestSubscribeResponse" name="requestSubscribeResponse">
+    </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="getRequests">
-      <wsdl:input message="tns:getRequests" name="getRequests"> </wsdl:input>
-      <wsdl:output message="tns:getRequestsResponse" name="getRequestsResponse"> </wsdl:output>
+      <wsdl:input message="tns:getRequests" name="getRequests">
+    </wsdl:input>
+      <wsdl:output message="tns:getRequestsResponse" name="getRequestsResponse">
+    </wsdl:output>
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="SubscriptionServiceSoapBinding" type="tns:SubscriptionService">
@@ -188,7 +229,7 @@ This XML file does not appear to have any style information associated with it. 
   </wsdl:binding>
   <wsdl:service name="SubscriptionService">
     <wsdl:port binding="tns:SubscriptionServiceSoapBinding" name="SubscriptionServicePort">
-      <soap:address location="http://172.18.0.3:8080/SubscriptionService"/>
+      <soap:address location="http://172.30.0.4:8080/SubscriptionService"/>
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>
